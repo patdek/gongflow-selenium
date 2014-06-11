@@ -1,11 +1,9 @@
+// This file is simply here so the _test file can be run
+// it serves no greater purpose
 package main
 
-import(
-		"fmt"
-
-		"github.com/patdek/gongflow"
-)
+import "fmt"
 
 func main() {
-	fmt.Println("Import test")
+	fmt.Println("Don't call me, I do nothing")
 }
