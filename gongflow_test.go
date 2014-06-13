@@ -28,7 +28,15 @@ func TestOpeningDemo(t *testing.T) {
 		t.Error("Unable to resolve page.  ", err)
 	}
 }
+func TestButtonUpload(t *testing.T) {
+	err = findAndUpload("span.btn:nth-child(2)")
+	if err != nil{
+		t.Error("Error", err)
+	}
+}
 
+// These two findAndClickButton functions are unnessicary for the moment.
+/*
 func TestButtonUpload(t *testing.T) {
 	err = findAndClickButton("span.btn:nth-child(2)", "Button Upload; ")
 	if err != nil {
@@ -42,14 +50,13 @@ func TestInputsBrowse(t *testing.T) {
 		t.Error("Unable to locate button. ", err)
 	}
 }
-
+*/
 func TestQuittingWebDriver(t *testing.T) {
 	err := wd.Quit()
 	if err != nil {
 		t.Error("Expected clean exit, got: ", err)
 	}
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Below here are helper functions
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +69,18 @@ func findAndClickButton(fieldID, errID string) error {
 	err = elem.Click()
 	if err != nil {
 		return errors.New("Unable to click button: " + errID + " " + err.Error())
+	}
+	return nil
+}
+// Function runs with no error, the element takes the sendkey file path with no problem.  But Nothing happens.
+func findAndUpload(fieldID string) error {
+	elem, err := wd.FindElement(selenium.ByCSSSelector, fieldID)
+	if err != nil{
+		return errors.New("Find error")
+	}
+	err = elem.SendKeys("filepath removed")
+	if err != nil {
+		return errors.New("sendkey error")
 	}
 	return nil
 }
